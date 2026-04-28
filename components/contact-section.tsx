@@ -44,8 +44,7 @@ export function ContactSection() {
       className="scroll-mt-8 py-16 sm:py-20 md:py-28"
     >
       <SectionHeader
-        number="003"
-        label="Stay in touch"
+        label="003 / Stay in touch"
         title="Occasional notes—no noise."
       />
       <div className="max-w-md">

@@ -1,18 +1,29 @@
-type SectionHeaderProps = {
-  number: string;
+"use client";
+
+import { motion } from "framer-motion";
+import { ScrambleLabel } from "./scramble-label";
+import { cn } from "@/lib/utils";
+
+interface SectionHeaderProps {
   label: string;
   title: string;
-};
+  className?: string;
+}
 
-export function SectionHeader({ number, label, title }: SectionHeaderProps) {
+export function SectionHeader({ label, title, className }: SectionHeaderProps) {
   return (
-    <header className="mb-10 md:mb-14">
-      <p className="font-sans text-[11px] font-medium uppercase tracking-[0.38em] text-muted-foreground sm:text-xs">
-        {number} / {label}
-      </p>
-      <h2 className="font-heading mt-4 max-w-[18ch] text-[clamp(2rem,5vw,3.25rem)] leading-[1.08] tracking-tight text-foreground">
+    <div className={cn("mb-12 md:mb-16", className)}>
+      <ScrambleLabel className="mb-4">{label}</ScrambleLabel>
+      
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        className="max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl md:text-5xl"
+      >
         {title}
-      </h2>
-    </header>
+      </motion.h2>
+    </div>
   );
 }

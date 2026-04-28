@@ -7,7 +7,10 @@ export function AboutSection() {
       id="about"
       className="scroll-mt-8 py-16 sm:py-20 md:py-28"
     >
-      <SectionHeader number="001" label="About" title="Practice at the edge of law and culture." />
+      <SectionHeader
+        label="001 / About"
+        title="Practice at the edge of law and culture."
+      />
       <div className="max-w-[38rem] space-y-6 text-[15px] leading-[1.78] text-foreground/85 sm:text-base sm:leading-[1.78]">
         <p>
           Zeev Kirsh works where legal judgment meets social inquiry—advising people and

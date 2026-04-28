@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { AmbientBackground } from "@/components/ambient-background";
 import { SiteShell } from "@/components/site-shell";
+import { StickyHeader } from "@/components/sticky-header";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,6 +34,7 @@ export default function RootLayout({
     >
       <body className="relative flex min-h-full flex-col overflow-x-hidden">
         <AmbientBackground />
+        <StickyHeader />
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

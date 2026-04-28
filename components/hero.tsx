@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { SignatureButton } from "./ui/signature-button";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,14 +15,21 @@ export function Hero() {
   // Parallax: Image moves slower than scroll
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   
-  // Fade, Scale, and Blur effects based on scroll
+  // Fade and Scale effects based on scroll (removed blur for a clearer look)
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const blur = useTransform(scrollYProgress, [0, 0.5], ["blur(0px)", "blur(10px)"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+
+  const handleExploreClick = () => {
+    const element = document.getElementById("projects");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
       ref={containerRef}
+      id="top"
       className="relative flex min-h-[90vh] w-full items-center justify-center overflow-hidden"
     >
       {/* Background Portal Image */}
@@ -34,35 +42,56 @@ export function Hero() {
           alt="Portal"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center brightness-[0.85]"
         />
-        {/* Overlay to ensure text readability and blend with background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
+        {/* Overlay to ensure text readability and blend with background - lightened */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-background/90" />
+        <div className="absolute inset-0 bg-black/10 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
       </motion.div>
 
-      {/* Hero Content */}
+      {/* Hero Content - Repositioned slightly higher */}
       <motion.div
-        style={{ opacity, scale, filter: blur }}
-        className="relative z-10 flex max-w-3xl flex-col items-center text-center"
+        style={{ opacity, scale }}
+        className="relative z-10 flex max-w-4xl flex-col items-center text-center px-6 -mt-24"
       >
-        <h1 className="font-serif text-6xl tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
-          Zeev Kirsh
-        </h1>
-        <p className="mt-6 font-sans text-lg font-light tracking-wide text-foreground/80 sm:text-xl md:text-2xl">
-          Attorney. Sociologist. Entrepreneur.
-        </p>
-        <p className="mt-4 max-w-xl font-sans text-base font-light leading-relaxed text-foreground/70 sm:text-lg">
-          Building communities and ventures that shape the future of New York.
-        </p>
-        
-        <motion.a
-          href="#projects"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="mt-10 rounded-full border border-foreground/20 bg-foreground px-8 py-3 font-sans text-sm font-medium tracking-widest text-background transition-colors hover:bg-foreground/90"
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="font-serif text-5xl tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)] sm:text-6xl md:text-7xl lg:text-8xl"
         >
-          EXPLORE PROJECTS
-        </motion.a>
+          Zeev Kirsh
+        </motion.h1>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-4 font-sans text-base font-light tracking-wide text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] sm:text-lg md:text-xl"
+        >
+          Attorney. Sociologist. Entrepreneur.
+        </motion.p>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-3 max-w-xl font-sans text-sm font-light leading-relaxed text-white/80 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] sm:text-base"
+        >
+          Building communities and ventures that shape the future of New York.
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+          className="mt-8"
+        >
+          <SignatureButton onClick={handleExploreClick}>
+            EXPLORE PROJECTS
+          </SignatureButton>
+        </motion.div>
       </motion.div>
     </section>
   );
