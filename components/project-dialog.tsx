@@ -63,14 +63,13 @@ export function ProjectDialog({
       </div>
 
       <DialogClose
-        onMouseEnter={closeLabel.start}
-        onMouseLeave={closeLabel.stop}
+        onMouseEnter={closeLabel.scramble}
         className={cn(
           buttonVariants({ variant: "secondary", size: "sm" }),
           "absolute top-4 right-4 rounded-full border border-border/70 bg-background/80 px-4 backdrop-blur-sm",
         )}
       >
-        {closeLabel.text}
+        {closeLabel.displayText}
       </DialogClose>
 
       <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[240px,1fr]">
