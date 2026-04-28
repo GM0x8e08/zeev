@@ -16,7 +16,7 @@ function DialogTrigger({ asChild, ...props }: DialogPrimitive.Trigger.Props & { 
     <DialogPrimitive.Trigger
       data-slot="dialog-trigger"
       nativeButton={!asChild}
-      render={asChild ? props.children : undefined}
+      render={asChild ? (props.children as React.ReactElement) : undefined}
       {...props}
     />
   )
@@ -31,7 +31,7 @@ function DialogClose({ asChild, ...props }: DialogPrimitive.Close.Props & { asCh
     <DialogPrimitive.Close
       data-slot="dialog-close"
       nativeButton={!asChild}
-      render={asChild ? props.children : undefined}
+      render={asChild ? (props.children as React.ReactElement) : undefined}
       {...props}
     />
   )
